@@ -18,15 +18,25 @@ const detailsSchema = new mongoose.Schema({
   numberOfEpisodes: { type: Number, default: 0 },
 });
 
+const descriptionSchema = new mongoose.Schema({
+  descriptiontitle: { type: String, required: true },
+  story: { type: String, required: true },
+  plusPoint: { type: String, required: true },
+  minusPoint: { type: String, required: true },
+  technicalAspect: { type: String, required: true },
+  finalReview: { type: String, required: true },
+});
+
 const blogGenreSchema = new mongoose.Schema({
   title: { type: String, required: true },
   category: { type: String, required: true },
-  description: { type: String, required: true },
+  simpledescription: { type: String, required: true },
   img: { type: String, required: true },
   back: { type: String, required: true },
   video: { type: String, required: true },
   star: { type: String, required: true },
   details: detailsSchema,
+  description: descriptionSchema,
   ratings: [ratingSchema],
 });
 
