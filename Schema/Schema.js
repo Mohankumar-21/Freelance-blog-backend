@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ratingSchema = new mongoose.Schema({
-  rating: { type: Number, required: true, min: 1, max: 5 },
+  rating: { type: Number, min: 1, max: 5 },
   comment: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
@@ -34,7 +34,7 @@ const blogGenreSchema = new mongoose.Schema({
   img: { type: String, required: true },
   back: { type: String, required: true },
   video: { type: String, required: true },
-  star: { type: String, required: true },
+  star: { type: Number, required: true, default: 0 }, 
   details: detailsSchema,
   description: descriptionSchema,
   ratings: [ratingSchema],

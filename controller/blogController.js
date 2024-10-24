@@ -117,9 +117,40 @@ const deleteBlog = async (req, res) => {
     }
 };
 
+
+const StarRatings =async (req,res)=>
+{
+    const { blogId, rating } = req.body;
+
+    try {
+ 
+      const blog = await BlogGenre.findById(blogId);
+      if (!blog) return res.status(404).send("Blog not found");
+  
+
+      const currentStar = parseFloat(blog.star); 
+      const totalRatings = blog.ratings.length + 1;
+      
+
+      const newAverage = ((currentStar * (totalRatings - 1)) + rating) / totalRatings;
+  
+  
+      blog.star = newAverage.toFixed(1); 
+  
+   
+      await blog.save();
+  
+      res.status(200).json({ message: "Rating submitted", newStar: blog.star });
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+}
+
 module.exports = {
     getAllBlogs,
     addBlog,
     updateBlog,
     deleteBlog,
+    StarRatings,
 };
